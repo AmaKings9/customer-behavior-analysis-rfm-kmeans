@@ -18,9 +18,9 @@ def build_rfm_table(df):
         'InvoiceDate': lambda x: (snapshot_date - x.max()).days,
         'Invoice': 'count',
         'TotalPrice': 'sum'
-    })
+    }).reset_index()
 
-    rfm.columns = ['Recency', 'Frequency', 'Monetary']
+    rfm.columns = ['Customer ID', 'Recency', 'Frequency', 'Monetary']
 
     return rfm
 
@@ -44,8 +44,9 @@ def preprocess_rfm(df_rfm):
     df_scaled = pd.DataFrame(
         scaled_values,
         columns=['Recency', 'Frequency', 'Monetary'],
-        index=df.index
     )
+
+    df_scaled['Customer ID'] = df['Customer ID']
 
     return df_scaled
 
