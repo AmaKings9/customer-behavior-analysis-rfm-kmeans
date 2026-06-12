@@ -1,3 +1,4 @@
 # Environments
 .env
 ._*
+requirements_full.txt
